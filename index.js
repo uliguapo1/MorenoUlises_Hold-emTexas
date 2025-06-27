@@ -20,13 +20,17 @@ function shuffleDeck(deck) {
 
 function dealCards (deck){
     let hand1 = [deck.pop(), deck.pop()];
-    let table = [];
+    let comunityCards = [];
     for (let i = 0; i < 5; i++) {
-        table.push(deck.pop());
+        comunityCards.push(deck.pop());
     }
-    return { hand1, table };
+    return { hand1, comunityCards };
 }
 
 let deck = generateDeck();
 shuffleDeck(deck);
 let game = dealCards(deck);
+
+console.log("Texas Hold'em Game");
+console.log("Player's Hand:", game.hand1);
+console.log("Community Cards:", game.comunityCards);
