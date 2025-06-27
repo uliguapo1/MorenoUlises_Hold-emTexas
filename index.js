@@ -18,3 +18,15 @@ function shuffleDeck(deck) {
     }
 }
 
+function dealCards (deck){
+    let hand1 = [deck.pop(), deck.pop()];
+    let table = [];
+    for (let i = 0; i < 5; i++) {
+        table.push(deck.pop());
+    }
+    return { hand1, table };
+}
+
+let deck = generateDeck();
+shuffleDeck(deck);
+let game = dealCards(deck);
