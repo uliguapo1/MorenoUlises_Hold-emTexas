@@ -1,11 +1,11 @@
-const suits = ["♠", "♣", "♦", "♥"]; 
+const suits = ["♠", "♣", "♦", "♥"];
 const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 
 function generateDeck() {
-    const deck = [];
+    let deck = [];
     for (let suit of suits) {
         for (let rank of ranks) {
-            deck.push( rank + suit );
+            deck.push(rank + suit);
         }
     }
     return deck;
@@ -30,7 +30,17 @@ function dealCards (deck){
 let deck = generateDeck();
 shuffleDeck(deck);
 let game = dealCards(deck);
+let gametest = [...game.comunityCards, ...game.hand1]
+console.log("Game Test:", gametest);
+
+const dealerCheck = (game) => {
+    const fullHand = [...game.comunityCards, ...game.hand1];
+    fullHand.sort((a, b) => {
+        console.log(`Comparing ${a} and ${b}`);
+    })
+};
 
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
 console.log("Community Cards:", game.comunityCards);
+console.log(dealerCheck(game));
