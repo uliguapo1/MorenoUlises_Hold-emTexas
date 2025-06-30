@@ -27,19 +27,23 @@ function dealCards (deck){
     return { hand1, comunityCards };
 }
 
-let deck = generateDeck();
-shuffleDeck(deck);
-let game = dealCards(deck);
-let gametest = [...game.comunityCards, ...game.hand1]
-console.log("Game Test:", gametest);
+// let deck = generateDeck();
+// shuffleDeck(deck);
+// let game = dealCards(deck);
+// let gametest = [...game.comunityCards, ...game.hand1]
+// console.log("Game Test:", gametest);
 
-const dealerCheck = (game) => {
-    const fullHand = [...game.comunityCards, ...game.hand1];
-    fullHand.sort((a, b) => {
-        console.log(`Comparing ${a} and ${b}`);
-    })
-};
+function rankValue (r) {
+return ranks.indexOf(r);
+}
 
+// const dealerCheck = (game) => {
+//     const ranks = "23456789TJQKA";
+//     const parseCard = (card) => ({ rank: card [0], suit: card.slide(-1) });
+//     const fullHand = [...game.comunityCards, ...game.hand1].map(parseCard);
+
+// }
+    
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
 console.log("Community Cards:", game.comunityCards);
