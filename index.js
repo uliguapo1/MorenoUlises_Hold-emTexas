@@ -37,12 +37,28 @@ function rankValue (r) {
 return ranks.indexOf(r);
 }
 
-// const dealerCheck = (game) => {
-//     const ranks = "23456789TJQKA";
-//     const parseCard = (card) => ({ rank: card [0], suit: card.slide(-1) });
-//     const fullHand = [...game.comunityCards, ...game.hand1].map(parseCard);
+function parseCard(card) {
+    const suit = card.slice(-1);     
+    const rank = card.slice(0, -1);   
+    return { rank, suit };
+}
 
-// }
+function countByRank (cards) {
+    let counter = {};
+    for ( let c of cards){
+        counter[c.rank] = (counter[c.rank] || 0) + 1;
+    }
+    return counter;
+}
+
+function countBySuit(cards) {
+    let counter = {};
+    for (let c of cards) {
+        counter[c.suit] = (counter[c.suit] || 0) + 1;
+    }
+    return counter;
+}
+
     
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
