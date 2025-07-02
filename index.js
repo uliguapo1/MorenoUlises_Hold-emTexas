@@ -18,7 +18,7 @@ function shuffleDeck(deck) {
     }
 }
 
-function dealCards (deck){
+function dealCards(deck) {
     let hand1 = [deck.pop(), deck.pop()];
     let comunityCards = [];
     for (let i = 0; i < 5; i++) {
@@ -28,19 +28,19 @@ function dealCards (deck){
 }
 
 // Start of the hands value
-function rankValue (r) {
-return ranks.indexOf(r);
+function rankValue(r) {
+    return ranks.indexOf(r);
 }
 
 function parseCard(card) {
-    const suit = card.slice(-1);     
-    const rank = card.slice(0, -1);   
+    const suit = card.slice(-1);
+    const rank = card.slice(0, -1);
     return { rank, suit };
 }
 
-function countByRank (cards) {
+function countByRank(cards) {
     let counter = {};
-    for ( let c of cards){
+    for (let c of cards) {
         counter[c.rank] = (counter[c.rank] || 0) + 1;
     }
     return counter;
@@ -64,30 +64,30 @@ function hasFlush(cards) {
     return false;
 }
 
-function getFlushCards(cards){
+function getFlushCards(cards) {
     const suitCounts = countBySuit(cards);
- for (let s in suitCounts){
-    if (suitCounts[s] >= 5){
-        return cards.filter(c => c.suit === s);
+    for (let s in suitCounts) {
+        if (suitCounts[s] >= 5) {
+            return cards.filter(c => c.suit === s);
+        }
     }
- }
-return [];
+    return [];
 }
 
 function hasStraight(cards) {
     const ranks = "23456789TJQKA";
     let values = [...new Set(cards.map(c => ranks.indexOf(c.rank)))].sort((a, b) => a - b);
     for (let i = 0; i < values.length - 4; i++) {
-        if (values [i + 4] - values[i] === 4) 
+        if (values[i + 4] - values[i] === 4)
             return true;
-        }    
-        return false;
     }
+    return false;
+}
 
 function hasStraightFlush(cards) {
- const flushCards = getFlushCards(cards);
+    const flushCards = getFlushCards(cards);
     if (flushCards.length < 5) {
-        return hasStraight (flushCards);
+        return hasStraight(flushCards);
     }
     return false;
 }
@@ -122,6 +122,28 @@ function isTwoPair(rankCounts) {
         if (count === 2) pairs++;
     }
     return pairs === 2;
+}
+
+function isPair(rankCounts) {
+    for (let count of Object.values(rankCounts)) {
+        if (count === 2) return true;
+    }
+    return false;
+}
+
+function dealerCheck(deck) {
+    const hand = cards.map(parseCard);
+    const rankCounts = countByRank(hand);
+
+        if (hasStraightFlush(hand)) return "Straight Flush";
+        if (isFourOfAKind(rankCounts)) return "Four of a Kind";
+        if (isFullHouse(rankCounts)) return "Full House";
+        if (hasFlush(hand)) return "Flush";
+        if (hasStraight(hand)) return "Straight";
+        if (isThreeOfAKind(rankCounts)) return "Three of a Kind";
+        if (isTwoPair(rankCounts)) return "Two Pair";
+        if (isPair(rankCounts)) return "One Pair";
+        return "High Card";
 }
 
 console.log("Texas Hold'em Game");
