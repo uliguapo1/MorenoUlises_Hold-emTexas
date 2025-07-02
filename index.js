@@ -92,11 +92,19 @@ function hasStraightFlush(cards) {
     return false;
 }
 
-function hasFourOfAKind(rankCounts) {
+function isFourOfAKind(rankCounts) {
     return Object.values(rankCounts).includes(4);
 }
 
-
+function isFullHouse(rankCounts) {
+    let hasThree = false;
+    let hasTwo = false;
+    for (let count of Object.values(rankCounts)) {
+        if (count === 3) hasThree = true;
+        if (count === 2) hasTwo = true;
+    }
+    return hasThree && hasTwo;
+}
 
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
