@@ -84,13 +84,19 @@ function hasStraight(cards) {
         return false;
     }
 
-function getStraightFlush(cards) {
+function hasStraightFlush(cards) {
  const flushCards = getFlushCards(cards);
     if (flushCards.length < 5) {
         return hasStraight (flushCards);
     }
     return false;
 }
+
+function hasFourOfAKind(rankCounts) {
+    return Object.values(rankCounts).includes(4);
+}
+
+
 
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
