@@ -132,7 +132,7 @@ function isPair(rankCounts) {
 }
 
 function dealerCheck(deck) {
-    const hand = cards.map(parseCard);
+    const hand = deck.map(parseCard);
     const rankCounts = countByRank(hand);
 
         if (hasStraightFlush(hand)) return "Straight Flush";
@@ -146,7 +146,13 @@ function dealerCheck(deck) {
         return "High Card";
 }
 
+let deck = generateDeck();
+shuffleDeck(deck);
+let game = dealCards(deck);
+let fullHand = [...game.hand1, ...game.comunityCards];
+
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
 console.log("Community Cards:", game.comunityCards);
+console.log("Hand Value:", dealerCheck(fullHand));
 
