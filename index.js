@@ -109,6 +109,20 @@ function isFullHouse(rankCounts) {
     return hasThree && hasTwo;
 }
 
+function isThreeOfAKind(rankCounts) {
+    for (let count of Object.values(rankCounts)) {
+        if (count === 3) return true;
+    }
+    return false;
+}
+
+function isTwoPair(rankCounts) {
+    let pairs = 0;
+    for (let count of Object.values(rankCounts)) {
+        if (count === 2) pairs++;
+    }
+    return pairs === 2;
+}
 
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
