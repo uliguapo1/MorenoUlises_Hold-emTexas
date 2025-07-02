@@ -27,12 +27,7 @@ function dealCards (deck){
     return { hand1, comunityCards };
 }
 
-// let deck = generateDeck();
-// shuffleDeck(deck);
-// let game = dealCards(deck);
-// let gametest = [...game.comunityCards, ...game.hand1]
-// console.log("Game Test:", gametest);
-
+// Start of the hands value
 function rankValue (r) {
 return ranks.indexOf(r);
 }
@@ -59,8 +54,45 @@ function countBySuit(cards) {
     return counter;
 }
 
-    
+function hasFlush(cards) {
+    const suitCounts = countBySuit(cards);
+    for (let s in suitCounts) {
+        if (suitCounts[s] >= 5) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function getFlushCards(cards){
+    const suitCounts = countBySuit(cards);
+ for (let s in suitCounts){
+    if (suitCounts[s] >= 5){
+        return cards.filter(c => c.suit === s);
+    }
+ }
+return [];
+}
+
+function hasStraight(cards) {
+    const ranks = "23456789TJQKA";
+    let values = [...new Set(cards.map(c => ranks.indexOf(c.rank)))].sort((a, b) => a - b);
+    for (let i = 0; i < values.length - 4; i++) {
+        if (values [i + 4] - values[i] === 4) 
+            return true;
+        }    
+        return false;
+    }
+
+function getStraightFlush(cards) {
+ const flushCards = getFlushCards(cards);
+    if (flushCards.length < 5) {
+        return hasStraight (flushCards);
+    }
+    return false;
+}
+
 console.log("Texas Hold'em Game");
 console.log("Player's Hand:", game.hand1);
 console.log("Community Cards:", game.comunityCards);
-console.log(dealerCheck(game));
+
